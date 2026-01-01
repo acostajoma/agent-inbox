@@ -35,7 +35,7 @@ This project uses **Bun** (or local comparable package manager).
 ### 2. **Flat List with Injected Headers**
 *   **Decision:** In `InboxLayout`, I derive two separate lists (`aiHandling`, `needsYou`) but merge them into a single `displayList` for rendering, injecting "Header" objects directly into the array.
 *   **Code:** `const displayList = createMemo(() => [AI_HEADER, ...aiHandling(), NEEDS_HEADER, ...needsYou()]);`
-*   **Tradeoff:** This complicates the rendering logic (Requires a `type` check inside the `<For>` loop), but it simplifies the keyboard navigation and scrolling. We don't need to manage focus across two separate DOM lists; `j` and `k` simply traverse one continuous logical array.
+*   **Tradeoff:** This complicates the rendering logic (Requires a `type` check inside the `<For>` loop), but it simplifies the keyboard navigation and scrolling. Don't need to manage focus across two separate DOM lists; `j` and `k` simply traverse one continuous logical array.
 
 ### 3. **Decoupled Keyboard Navigation**
 *   **Decision:** Keyboard events are handled by a `window` listener that manipulates a logical index, rather than relying on browser native focus (`tabindex`) or `document.activeElement`.
@@ -43,7 +43,7 @@ This project uses **Bun** (or local comparable package manager).
 
 ### 4. **URL-Driven Selection Sync**
 *   **Decision:** The `InboxDetail` route uses a `loader` to call `setSelectedId(params.id)`.
-*   **Tradeoff:** We treat the URL as the "Source of Truth" for navigation, but the Store as the "Source of Truth" for data
+*   **Tradeoff:** Treat the URL as the "Source of Truth" for navigation, but the Store as the "Source of Truth" for data
 
 ## 🔮 What I'd Do With Another Day
 
